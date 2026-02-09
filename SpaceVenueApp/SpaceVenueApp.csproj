@@ -5,12 +5,21 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+    <AssemblyName>SpaceVenueApp</AssemblyName>
+    <RootNamespace>SpaceVenueApp</RootNamespace>
   </PropertyGroup>
-<<<<<<< HEAD
+
+  </PropertyGroup>
+ HEAD
+ main
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
   </ItemGroup>
-=======
->>>>>>> main
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+
+ main
+ main
 </Project>
