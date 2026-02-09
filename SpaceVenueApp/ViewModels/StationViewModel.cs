@@ -1,7 +1,11 @@
 using System;
 using System.Windows.Input;
 using System.Windows.Media;
+ codex/create-desktop-app-for-billiards-venue-pnjysf
 using System.Windows;
+
+using System.Windows;
+ main
 
 namespace SpaceVenueApp.ViewModels;
 
@@ -11,8 +15,16 @@ public class StationViewModel : ObservableObject
     private bool _isPaused;
     private TimeSpan _elapsed;
     private decimal _currentCharge;
+ codex/create-desktop-app-for-billiards-venue-pnjysf
     private string _customerName = string.Empty;
     private int? _sessionId;
+
+ HEAD
+    private string _customerName = string.Empty;
+    private int? _sessionId;
+
+ main
+ main
 
     public StationViewModel(string name, string type, decimal ratePerHour)
     {
@@ -22,12 +34,22 @@ public class StationViewModel : ObservableObject
         StartCommand = new RelayCommand(StartSession, () => !IsActive || IsPaused);
         PauseCommand = new RelayCommand(PauseSession, () => IsActive && !IsPaused);
         StopCommand = new RelayCommand(StopSession, () => IsActive);
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+ HEAD
+ main
         ResetCommand = new RelayCommand(ResetSession, () => !IsActive && Elapsed > TimeSpan.Zero);
     }
 
     public event EventHandler<SessionEventArgs>? SessionStarted;
     public event EventHandler<SessionEventArgs>? SessionStopped;
 
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+    }
+
+ main
+ main
     public string Name { get; }
     public string Type { get; }
     public decimal RatePerHour { get; }
@@ -35,7 +57,13 @@ public class StationViewModel : ObservableObject
     public ICommand StartCommand { get; }
     public ICommand PauseCommand { get; }
     public ICommand StopCommand { get; }
+ codex/create-desktop-app-for-billiards-venue-pnjysf
     public ICommand ResetCommand { get; }
+ HEAD
+    public ICommand ResetCommand { get; }
+
+ main
+ main
 
     public bool IsActive
     {
@@ -70,7 +98,14 @@ public class StationViewModel : ObservableObject
             if (SetProperty(ref _elapsed, value))
             {
                 RaisePropertyChanged(nameof(ElapsedDisplay));
+ codex/create-desktop-app-for-billiards-venue-pnjysf
                 RaiseCommandStates();
+
+ HEAD
+                RaiseCommandStates();
+
+ main
+ main
             }
         }
     }
@@ -83,6 +118,10 @@ public class StationViewModel : ObservableObject
         private set => SetProperty(ref _currentCharge, value);
     }
 
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+ HEAD
+ main
     public string CustomerName
     {
         get => _customerName;
@@ -99,6 +138,12 @@ public class StationViewModel : ObservableObject
             return brush as Brush ?? Brushes.Gray;
         }
     }
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+
+    public Brush StatusBrush => IsActive ? Brushes.LimeGreen : Brushes.IndianRed;
+ main
+ main
 
     public void Tick(TimeSpan delta)
     {
@@ -115,7 +160,14 @@ public class StationViewModel : ObservableObject
     {
         IsActive = true;
         IsPaused = false;
+ codex/create-desktop-app-for-billiards-venue-pnjysf
         SessionStarted?.Invoke(this, new SessionEventArgs(Name, CustomerName));
+
+ HEAD
+        SessionStarted?.Invoke(this, new SessionEventArgs(Name, CustomerName));
+
+ main
+ main
     }
 
     private void PauseSession()
@@ -127,21 +179,35 @@ public class StationViewModel : ObservableObject
     {
         IsActive = false;
         IsPaused = false;
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+ HEAD
+ main
         SessionStopped?.Invoke(this, new SessionEventArgs(Name, CustomerName, CurrentCharge, _sessionId));
         _sessionId = null;
     }
 
     private void ResetSession()
     {
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+
+ main
+ main
         Elapsed = TimeSpan.Zero;
         CurrentCharge = 0m;
     }
 
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+ HEAD
+ main
     public void AttachSession(int sessionId)
     {
         _sessionId = sessionId;
     }
 
+ main
     private void RaiseCommandStates()
     {
         (StartCommand as RelayCommand)?.RaiseCanExecuteChanged();
@@ -152,3 +218,6 @@ public class StationViewModel : ObservableObject
 }
 
 public record SessionEventArgs(string StationName, string CustomerName, decimal? Cost = null, int? SessionId = null);
+    }
+}
+ main

@@ -1,3 +1,7 @@
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+ HEAD
+ main
 using SpaceVenueApp.ViewModels;
 
 namespace SpaceVenueApp.Models;
@@ -44,5 +48,17 @@ public class CashSummary : ObservableObject
         }
     }
 
+ codex/create-desktop-app-for-billiards-venue-pnjysf
+
+
+namespace SpaceVenueApp.Models;
+
+public class CashSummary
+{
+    public decimal OpeningBalance { get; set; }
+    public decimal TotalDeposits { get; set; }
+    public decimal TotalWithdrawals { get; set; }
+ main
+ main
     public decimal ExpectedClosing => OpeningBalance + TotalDeposits - TotalWithdrawals;
 }
