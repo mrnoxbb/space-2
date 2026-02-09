@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using SpaceVenueApp.ViewModels;
 
 namespace SpaceVenueApp.Models;
@@ -44,5 +45,14 @@ public class CashSummary : ObservableObject
         }
     }
 
+=======
+namespace SpaceVenueApp.Models;
+
+public class CashSummary
+{
+    public decimal OpeningBalance { get; set; }
+    public decimal TotalDeposits { get; set; }
+    public decimal TotalWithdrawals { get; set; }
+>>>>>>> main
     public decimal ExpectedClosing => OpeningBalance + TotalDeposits - TotalWithdrawals;
 }

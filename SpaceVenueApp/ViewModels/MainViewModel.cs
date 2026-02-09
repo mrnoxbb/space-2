@@ -1,19 +1,26 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+<<<<<<< HEAD
 using System.IO;
+=======
+>>>>>>> main
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
 using SpaceVenueApp.Models;
+<<<<<<< HEAD
 using SpaceVenueApp.Services;
+=======
+>>>>>>> main
 
 namespace SpaceVenueApp.ViewModels;
 
 public class MainViewModel : ObservableObject
 {
     private readonly DispatcherTimer _timer;
+<<<<<<< HEAD
     private readonly DatabaseService _database;
     private bool _isRtlEnabled;
     private string _dailyReportSummary = string.Empty;
@@ -31,6 +38,14 @@ public class MainViewModel : ObservableObject
         _database = new DatabaseService();
         _database.Initialize();
 
+=======
+    private bool _isRtlEnabled;
+    private string _dailyReportSummary = string.Empty;
+    private FlowDirection _uiFlowDirection = FlowDirection.LeftToRight;
+
+    public MainViewModel()
+    {
+>>>>>>> main
         Stations = new ObservableCollection<StationViewModel>
         {
             new("Billiards Table 1", "Pool Table", 120m),
@@ -40,6 +55,7 @@ public class MainViewModel : ObservableObject
             new("PlayStation 2", "Console", 90m)
         };
 
+<<<<<<< HEAD
         foreach (var station in Stations)
         {
             station.SessionStarted += OnSessionStarted;
@@ -65,6 +81,25 @@ public class MainViewModel : ObservableObject
         LoadData();
         UpdateDailyReport();
         UpdateMonthlyReport();
+=======
+        Items = new ObservableCollection<Item>
+        {
+            new() { Name = "Karkadeh", Price = 25m, UnitsSold = 14 },
+            new() { Name = "Cola", Price = 20m, UnitsSold = 10 },
+            new() { Name = "Chips", Price = 15m, UnitsSold = 7 },
+            new() { Name = "Energy Drink", Price = 35m, UnitsSold = 4 }
+        };
+
+        CashSummary = new CashSummary
+        {
+            OpeningBalance = 1500m,
+            TotalDeposits = 2350m,
+            TotalWithdrawals = 400m
+        };
+
+        ExportCommand = new RelayCommand(ExportReport);
+        UpdateDailyReport();
+>>>>>>> main
 
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _timer.Tick += (_, _) => TickStations();
@@ -73,6 +108,7 @@ public class MainViewModel : ObservableObject
 
     public ObservableCollection<StationViewModel> Stations { get; }
     public ObservableCollection<Item> Items { get; }
+<<<<<<< HEAD
     public ObservableCollection<CashTransaction> CashTransactions { get; }
     public ObservableCollection<Session> Sessions { get; }
     public CashSummary CashSummary { get; }
@@ -83,6 +119,9 @@ public class MainViewModel : ObservableObject
     public RelayCommand RecordSaleCommand { get; }
     public RelayCommand DepositCommand { get; }
     public RelayCommand WithdrawCommand { get; }
+=======
+    public CashSummary CashSummary { get; }
+>>>>>>> main
     public RelayCommand ExportCommand { get; }
 
     public bool IsRtlEnabled
@@ -109,6 +148,7 @@ public class MainViewModel : ObservableObject
         private set => SetProperty(ref _dailyReportSummary, value);
     }
 
+<<<<<<< HEAD
     public string MonthlyReportSummary
     {
         get => _monthlyReportSummary;
@@ -219,6 +259,8 @@ public class MainViewModel : ObservableObject
         RecalculateCashSummary();
     }
 
+=======
+>>>>>>> main
     private void TickStations()
     {
         foreach (var station in Stations)
@@ -227,6 +269,7 @@ public class MainViewModel : ObservableObject
         }
 
         UpdateDailyReport();
+<<<<<<< HEAD
         UpdateMonthlyReport();
     }
 
@@ -304,12 +347,18 @@ public class MainViewModel : ObservableObject
         CashSummary.TotalDeposits = deposits;
         CashSummary.TotalWithdrawals = withdrawals;
         RaisePropertyChanged(nameof(CashSummary));
+=======
+>>>>>>> main
     }
 
     private void UpdateDailyReport()
     {
         var totalStationRevenue = Stations.Sum(station => station.CurrentCharge);
+<<<<<<< HEAD
         var totalItemRevenue = Items.Sum(item => item.Revenue);
+=======
+        var totalItemRevenue = Items.Sum(item => item.Price * item.UnitsSold);
+>>>>>>> main
         var totalRevenue = totalStationRevenue + totalItemRevenue;
 
         var builder = new StringBuilder();
@@ -321,6 +370,7 @@ public class MainViewModel : ObservableObject
         DailyReportSummary = builder.ToString().Trim();
     }
 
+<<<<<<< HEAD
     private void UpdateMonthlyReport()
     {
         var monthlyStationRevenue = Stations.Sum(station => station.CurrentCharge) * 30;
@@ -350,10 +400,16 @@ public class MainViewModel : ObservableObject
         File.WriteAllLines(itemsFile, CsvExportService.ExportItems(Items));
 
         MessageBox.Show($"Export complete. Reports saved to {exportPath}.",
+=======
+    private void ExportReport()
+    {
+        MessageBox.Show("Export queued. Reports will be saved as PDF and CSV in the reports folder.",
+>>>>>>> main
             "Export",
             MessageBoxButton.OK,
             MessageBoxImage.Information);
     }
+<<<<<<< HEAD
 
     private void OnSessionStarted(object? sender, SessionEventArgs e)
     {
@@ -392,4 +448,6 @@ public class MainViewModel : ObservableObject
         UpdateDailyReport();
         UpdateMonthlyReport();
     }
+=======
+>>>>>>> main
 }

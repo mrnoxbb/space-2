@@ -1,7 +1,10 @@
 using System;
 using System.Windows.Input;
 using System.Windows.Media;
+<<<<<<< HEAD
 using System.Windows;
+=======
+>>>>>>> main
 
 namespace SpaceVenueApp.ViewModels;
 
@@ -11,8 +14,11 @@ public class StationViewModel : ObservableObject
     private bool _isPaused;
     private TimeSpan _elapsed;
     private decimal _currentCharge;
+<<<<<<< HEAD
     private string _customerName = string.Empty;
     private int? _sessionId;
+=======
+>>>>>>> main
 
     public StationViewModel(string name, string type, decimal ratePerHour)
     {
@@ -22,12 +28,17 @@ public class StationViewModel : ObservableObject
         StartCommand = new RelayCommand(StartSession, () => !IsActive || IsPaused);
         PauseCommand = new RelayCommand(PauseSession, () => IsActive && !IsPaused);
         StopCommand = new RelayCommand(StopSession, () => IsActive);
+<<<<<<< HEAD
         ResetCommand = new RelayCommand(ResetSession, () => !IsActive && Elapsed > TimeSpan.Zero);
     }
 
     public event EventHandler<SessionEventArgs>? SessionStarted;
     public event EventHandler<SessionEventArgs>? SessionStopped;
 
+=======
+    }
+
+>>>>>>> main
     public string Name { get; }
     public string Type { get; }
     public decimal RatePerHour { get; }
@@ -35,7 +46,10 @@ public class StationViewModel : ObservableObject
     public ICommand StartCommand { get; }
     public ICommand PauseCommand { get; }
     public ICommand StopCommand { get; }
+<<<<<<< HEAD
     public ICommand ResetCommand { get; }
+=======
+>>>>>>> main
 
     public bool IsActive
     {
@@ -70,7 +84,10 @@ public class StationViewModel : ObservableObject
             if (SetProperty(ref _elapsed, value))
             {
                 RaisePropertyChanged(nameof(ElapsedDisplay));
+<<<<<<< HEAD
                 RaiseCommandStates();
+=======
+>>>>>>> main
             }
         }
     }
@@ -83,6 +100,7 @@ public class StationViewModel : ObservableObject
         private set => SetProperty(ref _currentCharge, value);
     }
 
+<<<<<<< HEAD
     public string CustomerName
     {
         get => _customerName;
@@ -99,6 +117,9 @@ public class StationViewModel : ObservableObject
             return brush as Brush ?? Brushes.Gray;
         }
     }
+=======
+    public Brush StatusBrush => IsActive ? Brushes.LimeGreen : Brushes.IndianRed;
+>>>>>>> main
 
     public void Tick(TimeSpan delta)
     {
@@ -115,7 +136,10 @@ public class StationViewModel : ObservableObject
     {
         IsActive = true;
         IsPaused = false;
+<<<<<<< HEAD
         SessionStarted?.Invoke(this, new SessionEventArgs(Name, CustomerName));
+=======
+>>>>>>> main
     }
 
     private void PauseSession()
@@ -127,28 +151,39 @@ public class StationViewModel : ObservableObject
     {
         IsActive = false;
         IsPaused = false;
+<<<<<<< HEAD
         SessionStopped?.Invoke(this, new SessionEventArgs(Name, CustomerName, CurrentCharge, _sessionId));
         _sessionId = null;
     }
 
     private void ResetSession()
     {
+=======
+>>>>>>> main
         Elapsed = TimeSpan.Zero;
         CurrentCharge = 0m;
     }
 
+<<<<<<< HEAD
     public void AttachSession(int sessionId)
     {
         _sessionId = sessionId;
     }
 
+=======
+>>>>>>> main
     private void RaiseCommandStates()
     {
         (StartCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (PauseCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (StopCommand as RelayCommand)?.RaiseCanExecuteChanged();
+<<<<<<< HEAD
         (ResetCommand as RelayCommand)?.RaiseCanExecuteChanged();
     }
 }
 
 public record SessionEventArgs(string StationName, string CustomerName, decimal? Cost = null, int? SessionId = null);
+=======
+    }
+}
+>>>>>>> main

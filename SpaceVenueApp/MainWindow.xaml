@@ -1,7 +1,11 @@
 <Window x:Class="SpaceVenueApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+<<<<<<< HEAD
         Title="Space Venue Manager" Height="920" Width="1480"
+=======
+        Title="Space Venue Manager" Height="900" Width="1400"
+>>>>>>> main
         Background="{StaticResource SpaceDarkBrush}"
         FlowDirection="{Binding UiFlowDirection}">
   <Grid Margin="24">
@@ -18,7 +22,11 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical">
           <TextBlock Text="Space Venue Control Center" FontSize="28" FontWeight="Bold" />
+<<<<<<< HEAD
           <TextBlock Text="Real-time timing, billing, cash, and reports (EGP)." FontSize="14" Opacity="0.8" />
+=======
+          <TextBlock Text="Real-time timing, billing, and cash tracking (EGP)." FontSize="14" Opacity="0.8" />
+>>>>>>> main
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="12">
           <TextBlock Text="Arabic RTL" VerticalAlignment="Center" />
@@ -42,6 +50,7 @@
       </Grid>
     </Border>
 
+<<<<<<< HEAD
     <TabControl Grid.Row="1" Background="#1B1B46" BorderThickness="0">
       <TabItem Header="Stations">
         <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16">
@@ -117,10 +126,104 @@
                       </StackPanel>
                     </Grid>
                   </Border>
+=======
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0">
+        <StackPanel Spacing="16">
+          <TextBlock Text="Live Stations" FontSize="20" FontWeight="Bold" Foreground="{StaticResource SpaceGoldBrush}" />
+          <ItemsControl ItemsSource="{Binding Stations}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal" ItemWidth="360" ItemHeight="230" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Border Background="#1B1B46" CornerRadius="16" Margin="0 0 16 16" Padding="16" Width="340" Height="210">
+                  <Grid>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="*" />
+                      <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <Ellipse Width="12" Height="12" Fill="{Binding StatusBrush}" />
+                      <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" />
+                      <TextBlock Text="•" FontSize="16" Opacity="0.6" />
+                      <TextBlock Text="{Binding Type}" FontSize="14" Opacity="0.7" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" Margin="0 10 0 0">
+                      <TextBlock Text="Rate:" Opacity="0.7" />
+                      <TextBlock Text="{Binding RatePerHour, StringFormat={}{0:C}}" FontWeight="SemiBold" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Vertical" Spacing="6" Margin="0 8 0 0">
+                      <TextBlock Text="Elapsed" Opacity="0.7" />
+                      <TextBlock Text="{Binding ElapsedDisplay}" FontSize="18" FontWeight="Bold" />
+                      <TextBlock Text="Current charge" Opacity="0.7" />
+                      <TextBlock Text="{Binding CurrentCharge, StringFormat={}{0:C}}" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SpaceGoldBrush}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                      <Button Content="Start" Command="{Binding StartCommand}" Padding="12 6" />
+                      <Button Content="Pause" Command="{Binding PauseCommand}" Padding="12 6" />
+                      <Button Content="Stop" Command="{Binding StopCommand}" Padding="12 6" />
+                    </StackPanel>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </ScrollViewer>
+
+      <StackPanel Grid.Column="1" Spacing="16">
+        <Border Background="#1B1B46" CornerRadius="16" Padding="16">
+          <StackPanel Spacing="12">
+            <TextBlock Text="Cash Register" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SpaceGoldBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Opening balance" Opacity="0.7" />
+              <TextBlock Text="{Binding CashSummary.OpeningBalance, StringFormat={}{0:C}}" FontWeight="SemiBold" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Cash in" Opacity="0.7" />
+              <TextBlock Text="{Binding CashSummary.TotalDeposits, StringFormat={}{0:C}}" FontWeight="SemiBold" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Cash out" Opacity="0.7" />
+              <TextBlock Text="{Binding CashSummary.TotalWithdrawals, StringFormat={}{0:C}}" FontWeight="SemiBold" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Expected balance" Opacity="0.7" />
+              <TextBlock Text="{Binding CashSummary.ExpectedClosing, StringFormat={}{0:C}}" FontWeight="SemiBold" Foreground="{StaticResource SpaceGoldBrush}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Background="#1B1B46" CornerRadius="16" Padding="16">
+          <StackPanel Spacing="12">
+            <TextBlock Text="Item Sales" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SpaceGoldBrush}" />
+            <ItemsControl ItemsSource="{Binding Items}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="8">
+                    <TextBlock Text="{Binding Name}" Width="120" />
+                    <TextBlock Text="{Binding Price, StringFormat={}{0:C}}" Width="100" />
+                    <TextBlock Text="{Binding UnitsSold}" Width="60" />
+                  </StackPanel>
+>>>>>>> main
                 </DataTemplate>
               </ItemsControl.ItemTemplate>
             </ItemsControl>
           </StackPanel>
+<<<<<<< HEAD
         </ScrollViewer>
       </TabItem>
 
@@ -359,5 +462,18 @@
         </Grid>
       </TabItem>
     </TabControl>
+=======
+        </Border>
+
+        <Border Background="#1B1B46" CornerRadius="16" Padding="16">
+          <StackPanel Spacing="12">
+            <TextBlock Text="Daily Statement" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SpaceGoldBrush}" />
+            <TextBlock Text="{Binding DailyReportSummary}" TextWrapping="Wrap" />
+            <Button Content="Export" HorizontalAlignment="Right" Padding="12 6" Command="{Binding ExportCommand}" />
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </Grid>
+>>>>>>> main
   </Grid>
 </Window>

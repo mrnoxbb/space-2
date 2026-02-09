@@ -6,8 +6,11 @@
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+<<<<<<< HEAD
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
   </ItemGroup>
+=======
+>>>>>>> main
 </Project>
